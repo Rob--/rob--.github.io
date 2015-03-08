@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/bootstrap.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Snapchat</title>
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+</head>
+<body style="background-color:#262626;font-family:Raleway">
+    <style type="text/css" style="display: none">
+        h1, h2, h3, h4{
+            color: #FFFFFF
+        }
+
+        span{
+            background-color:#424242
+        }
+
+        .highlight pre, pre {
+            background-color: #424242;
+            border-width:0px;
+            border-radius: 2px;
+            padding: 5px 10px;
+            white-space: pre;
+            overflow-x: auto;
+            width: inherit;
+            font-size: 1em
+        }
+        .highlight .p { color: #FFFFFF}
+        .highlight .i { color: #EB7F7D}
+        .highlight .s { color: #85EB98}
+        .highlight .b { color: #E589EB}
+
+        th {font-weight: normal}
+        .table>tbody>tr>th{
+            line-height:0.2;
+            border-top: 0px
+        }
+    </style>
+    <div class="row">
+        <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h1>Snapchat <font color="#3E606F">Disclosure</font></h1>
+                <hr>
+                <h3>
+                    Full disclosure on Snapchat's <span>/ph/</span> and <span>/bq/</span> endpoints can be found on <a href="http://gibsonsec.org/snapchat/fulldisclosure/">gibsonsec.org</a>.
+                <h3>
+                <h3>
+                    Note: this documentation is incomplete and will constantly be updated.
+                </h3>
+                <h4>
+                    This disclosure will consist of the latest endpoints (<span>/loq/</span>).
+                    <br><br>
+                    Each request to Snapchat's API needs to integrate a request token which is generated with the auth token. I won't discuss how this is generated as <a href="http://gibsonsec.org/snapchat/fulldisclosure/#authentication-tokens">gibsonsec</a> provide documentation.
+                    <br><br>
+                    Encryption and decryption of snaps and stories are also discussed on <a href="http://gibsonsec.org/snapchat/fulldisclosure/#encryptingdecrypting-data">gibsonsec</a>.
+                    <hr>
+                    <ol>
+                        <li><a href="index.html#register">Registering an account</a></li>
+                        <ol>
+                            <li><a href="index.html#register_register">Registering</a></li>
+                            <li><a href="index.html#register_username">Adding a username</a></li>
+                        <ol>
+                    </ol>
+                </h4>
+                <hr>
+                <h1 id="register">Registering an account</h1>
+                <h2 id="register_register">Registering (<span>/loq/register</span>)</h2>
+                <div class="highlight">
+<pre>
+<span class="p">{</span>
+    <span class="p">'age': </span><span class="i">19</span><span class="p">,</span>
+    <span class="p">'birthday': '<span class="s">1996-01-21</span></span><span class="p">',</span>
+    <span class="p">'dsig': </span><span class="s">d56e1a29cdcd6b0924cf,</span>
+    <span class="p">'dtoken1i': </span><span class="s">00001:VQIoDibzT8+2qcsnsP[...]</span><span class="p">,</span>
+    <span class="p">'email': '</span><span class="s">john@example.com</span><span class="p">',</span>
+    <span class="p">'password': '</span><span class="s">password<span class="p">',</span>
+<span class="p">}</span>
+</pre>
+                </div>
+                <table class="table" style="color:#FFFFFF; font-weight:500px">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>age</th>
+                            <th>integer</th>
+                            <th>the age of the user</th>
+                        </tr>
+                        <tr>
+                            <th>birthday</th>
+                            <th>string</th>
+                            <th>the birthday of the user (YYYY-MM-DD)</th>
+                        </tr>
+                        <tr>
+                            <th>dsig</th>
+                            <th>string</th>
+                            <th>the device signature, see <a href="index.html#misc_dsig">dsig</a></th>
+                        </tr>
+                        <tr>
+                            <th>dtoken1i</th>
+                            <th>string</th>
+                            <th>the device id/token, see <a href="index.html#misc_dtoken1i">dtoken1i</a></th>
+                        </tr>
+                        <tr>
+                    </tbody>
+                </table>
+
+                <h4>If the request was successful, the response will be as follows:</h4>
+                <div class="highlight">
+<pre>
+<span class="p">{</span>
+    <span class="p">'should_send_text_to_verify_number': </span><span class="b">False</span><span class="p">,</span>
+    <span class="p">'auth_token': '</span><span class="s">fc9b7223e1c5ddbe93b790966a24aa82</span><span class="p">',</span>
+    <span class="p">'snapchat_phone_number': '</span><span class="s">+447937985869</span><span class="p">',</span>
+    <span class="p">'email': '</span><span class="s">fake@example.com</span><span class="p">',</span>
+    <span class="p">'logged': </span><span class="b">True</span>
+<span class="p">}</span>
+</pre>
+                </div>
+
+                <table class="table" style="color:#FFFFFF; font-weight:500px">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>auth_token</th>
+                            <th>string</th>
+                            <th>authentication token used for making requests</th>
+                        </tr>
+                        <tr>
+                            <th>snapchat_phone_number</th>
+                            <th>string</th>
+                            <th>the number to send a text to to verify your number</th>
+                        </tr>
+                        <tr>
+                            <th>logged</th>
+                            <th>string</th>
+                            <th>indicates if the request was successful</th>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2 id="register_username">Adding a username (<span>/loq/register_username</span>)</h2>
+                <div class="highlight">
+<pre>
+<span class="p">{</span>
+    <span class="p">'username': '</span><span class="s">john@example.com</span><span class="p">',</span>
+    <span class="p">'selected_username': '</span><span class="s">'fake_username'</span><span class="p">',</span>
+<span class="p">}</span>
+</pre>
+                </div>
+                <table class="table" style="color:#FFFFFF; font-weight:500px">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>username</th>
+                            <th>string</th>
+                            <th>the email address of the user</th>
+                        </tr>
+                        <tr>
+                            <th>selected_username</th>
+                            <th>string</th>
+                            <th>the username to be assigned</th>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>If the request was successful, the response will be identical to the one returned when <a href="index.html#logging_in">logging</a> in.</h4>
+            </div>
+        <div class="col-md-3"></div>
+      </div>
+</body>
+</html>
