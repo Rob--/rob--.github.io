@@ -1,0 +1,21 @@
+------
+If /register is successful
+{
+    u'should_send_text_to_verify_number': False,
+    u'auth_token': u'fc9b7223e1c5ddbe93b790966a24aa82',
+    u'snapchat_phone_number': u'+447937985869',
+    u'email': u'thisihfdsd.sd@gmail.com',
+    u'logged': True
+}
+
+If /register is unsuccessful - email taken
+{u'status': -201, u'message': u'That email is already associated with a username.', u'logged': False}
+
+If /register_username - username too short
+{u'status': 69, u'message': u'Username must be at least 3 characters.', u'logged': False}
+
+If /register_username - username taken
+{u'status': 72, u'message': u'aaa is already taken!', u'logged': False}
+
+If /register_username - username invalid
+{u'status': 71, u'taken': True, u'message': u'Invalid username. Letters and numbers with an optional hyphen, underscore, or period in between please!', u'logged': False}

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Snapchat</title>
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body style="background-color:#1C1C1C;font-family:Raleway">
+    <style type="text/css" style="display: none">
+        h1, h2, h3, h4{
+            color: #FFFFFF
+        }
+
+        .highlight pre, pre {
+            background-color: #262626;
+            border-width:0px;
+            border-radius: 2px;
+            padding: 5px 10px;
+            white-space: pre;
+            overflow-x: auto;
+            width: inherit;
+            font-size: 1em;
+            color: #FFFFFF
+        }
+
+        code, .c{background-color:#262626; color:#FFFFFF}
+        .b{color:#87CEEB}
+        .s{color:#8EEB89}
+        .i{color:#EB7270}
+        .l{color:#D475EB}
+
+        th {font-weight: normal}
+        .table>tbody>tr>th{
+            line-height:0.2;
+            border-top: 0px
+        }
+    </style>
+    <div class="row">
+        <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h1>Snapchat <font color="#3E606F">Disclosure</font></h1>
+                <hr>
+                <h3>
+                    Full disclosure on Snapchat's <span class="c">/ph/</span> and <span class="c">/bq/</span> endpoints can be found on <a href="http://gibsonsec.org/snapchat/fulldisclosure/">gibsonsec.org</a>.
+                <h3>
+                <h3>
+                    Note: this documentation is incomplete and will constantly be updated.
+                </h3>
+                <h4>
+                    This disclosure will consist of the latest endpoints (<span class="c">/loq/</span>).
+                    <br><br>
+                    Each request to Snapchat's API needs to integrate a request token which is generated with the auth token. I won't discuss how this is generated as <a href="http://gibsonsec.org/snapchat/fulldisclosure/#authentication-tokens">gibsonsec</a> provide documentation.
+                    <br><br>
+                    Encryption and decryption of snaps and stories are also discussed on <a href="http://gibsonsec.org/snapchat/fulldisclosure/#encryptingdecrypting-data">gibsonsec</a>.
+                    <hr>
+                    <ol>
+                        <li><a href="index.html#notes">Notes</a></li>
+                        <ol>
+                            <li><a href="index.html#common_fields">Common fields</a></li>
+                        </ol>
+                        <li><a href="index.html#register">Registering an account</a></li>
+                        <ol>
+                            <li><a href="index.html#register_register">Registering</a></li>
+                            <li><a href="index.html#register_username">Adding a username</a></li>
+                        </ol>
+                        <li><a href="index.html#logging_in">Logging in</a></li>
+                    </ol>
+                </h4>
+                <hr>
+
+                <h1 id="notes">Notes</h1>
+                <h4>Wherever you see  <code>[...]</code>  it means I've cut out a portion of the text because it was unnecessarily long.</h4>
+                <h4>I will also generally only highlight important fields to make them stand out.</h4>
+                <h2 id="common_fields">Common fields</h2>
+                <h4>The following table is a list of common fields you will encounter with Snapchat's API.</h4>
+                <table class="table" style="color:#FFFFFF; font-weight:500px">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>username</th>
+                            <th>string</th>
+                            <th>the username of the account</th>
+                        </tr>
+                        <tr>
+                            <th>req_token</th>
+                            <th>string</th>
+                            <th>a token sent with requests to authenticate them</th>
+                        </tr>
+                        <tr>
+                            <th>auth_token</th>
+                            <th>string</th>
+                            <th>a token used to generate a req_token</th>
+                        </tr>
+                        <tr>
+                            <th>logged</th>
+                            <th>boolean</th>
+                            <th>indicates whether a request was successful or not</th>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+
+                <h1 id="register">Registering an account</h1>
+                <h2 id="register_register">Registering (<span class="c">/loq/register</span>)</h2>
+                <div class="highlight">
+<pre>
+<code>{
+    'age': <span class="i">19</span>,
+    'birthday': '<span class="s">1996-01-21</span>',
+    'dsig': '<span class="s">d56e1a29cdcd6b0924cf</span>',
+    'dtoken1i': '<span class="s">00001:VQIoDibzT8+2qcsnsP[...]</span>',
+    'email': '<span class="s">john@example.com</span>',
+    'password': '<span class="s">password</span>',
+}</code>
+</pre>
+                </div>
+                <table class="table" style="color:#FFFFFF; font-weight:500px">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>age</th>
+                            <th>integer</th>
+                            <th>the age of the user</th>
+                        </tr>
+                        <tr>
+                            <th>birthday</th>
+                            <th>string</th>
+                            <th>the birthday of the user (YYYY-MM-DD)</th>
+                        </tr>
+                        <tr>
+                            <th>dsig</th>
+                            <th>string</th>
+                            <th>see <a href="index.html#misc_dsig">dsig</a></th>
+                        </tr>
+                        <tr>
+                            <th>dtoken1i</th>
+                            <th>string</th>
+                            <th>see <a href="index.html#misc_dtoken1i">dtoken1i</a></th>
+                        </tr>
+                        <tr>
+                            <th>email</th>
+                            <th>string</th>
+                            <th>the email tied to the account</th>
+                        </tr>
+                        <tr>
+                            <th>password</th>
+                            <th>string</th>
+                            <th>the account's password</th>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>If the request was successful, the response will be as follows:</h4>
+                <div class="highlight">
+<pre>
+<code>{
+    'should_send_text_to_verify_number': <span class="b">False</span>,
+    'auth_token': '<span class="s">fc9b7223e1c5ddbe93b790966a24aa82</span>',
+    'snapchat_phone_number': '<span class="s">+447937985869</span>',
+    'email': '<span class="s">john@example.com</span>',
+    'logged': <span class="b">True</span>
+}</code>
+</pre>
+                </div>
+
+                <table class="table" style="color:#FFFFFF; font-weight:500px">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>should_send_text_to_verify_number</th>
+                            <th>string</th>
+                            <th>self explanatory</th>
+                        </tr>
+                        <tr>
+                            <th>auth_token</th>
+                            <th>string</th>
+                            <th>see <a href="index.html#common_fields">common fields</a></th>
+                        </tr>
+                        <tr>
+                            <th>snapchat_phone_number</th>
+                            <th>string</th>
+                            <th>the number to send a text to to verify your number</th>
+                        </tr>
+                        <tr>
+                            <th>email</th>
+                            <th>string</th>
+                            <th>the email tied to the account</th>
+                        </tr>
+                        <tr>
+                            <th>logged</th>
+                            <th>boolean</th>
+                            <th>see <a href="index.html#common_fields">common fields</a></th>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>If the request was unsuccessful, the response will be as follows:</h4>
+                <div class="highlight">
+<pre>
+<code>{
+    'status': <span class="i">000</span>,
+    'message': '<span class="s">Response message.</span>',
+    'logged': <span class="b">True</span>
+}</code>
+</pre>
+                </div>
+                <table class="table" style="color:#FFFFFF; font-weight:500px">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>status</th>
+                            <th>string</th>
+                            <th>the status code of the response (changes depending on the message)</th>
+                        </tr>
+                        <tr>
+                            <th>message</th>
+                            <th>string</th>
+                            <th>the error message (usually indicates invalid email/username)</th>
+                        </tr>
+                        <tr>
+                            <th>logged</th>
+                            <th>boolean</th>
+                            <th>see <a href="index.html#common_fields">common fields</a></th>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2 id="register_username">Adding a username (<span class="c">/loq/register_username</span>)</h2>
+                <div class="highlight">
+<pre>
+{
+    'username': '<span class="s">john@example.com</span>',
+    'selected_username': '<span class="s">fake_username</span>'
+}
+</pre>
+                </div>
+                <table class="table" style="color:#FFFFFF; font-weight:500px">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>username</th>
+                            <th>string</th>
+                            <th>the email address of the user</th>
+                        </tr>
+                        <tr>
+                            <th>selected_username</th>
+                            <th>string</th>
+                            <th>the username to be assigned</th>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>If the request was successful, the response will be identical to the one returned when <a href="index.html#logging_in">logging</a> in.</h4>
+                <hr>
+                <h1 id="logging_in">Logging into an account (<span class="c">/loq/login</span>)</h1>
+                <div class="highlight">
+<pre>
+<code>{
+    'username': '<span class="s">username</span>',
+    'password': '<span class="s">password</span>',
+    'ptoken': '<span class="s">APA91bHwso2xcvtzbZDLCdIMHKOoBu[...]</span>,
+    'dtoken1i': '<span class="s">00001:EAT2SUMtQjG32nmLN04c4EcQXE6eNi[...]</span>,
+    'dsig': '<span class="s">d56e1a29cdcd6b0924cf</span>',
+}</code>
+</pre>
+                </div>
+                <table class="table" style="color:#FFFFFF; font-weight:500px">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>username</th>
+                            <th>string</th>
+                            <th>the account's username</th>
+                        </tr>
+                        <tr>
+                            <th>password</th>
+                            <th>string</th>
+                            <th>the account's password</th>
+                        </tr>
+                        <tr>
+                            <th>ptoken</th>
+                            <th>string</th>
+                            <th>see <a href="index.html#misc_ptoken">ptoken</a></th>
+                        </tr>
+                        <tr>
+                            <th>dsig</th>
+                            <th>string</th>
+                            <th>see <a href="index.html#misc_dsig">dsig</a></th>
+                        </tr>
+                        <tr>
+                            <th>dtoken1i</th>
+                            <th>string</th>
+                            <th>see <a href="index.html#misc_dtoken1i">dtoken1i</a></th>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>If the request was successful, the response will be as follows:</h4>
+                <div class="highlight">
+<pre>
+<code>{
+    'conversations_response': [{}],
+    'stories_response': {},
+    'updates_response': {},
+    'friends_response': {},
+    'messaging_gateway_info': {},
+    'background_fetch_secret_key': ''
+}
+</code>
+</pre>
+                </div>
+
+                <h4>The response when logging in is composed of 6 different parts (as seen above).</h4>
+                <h3>Conversations response</h3>
+                <div class="highlight">
+<pre>
+<code>[{
+    'last_interaction_ts': <span class="l">1425486251999L</span>,
+    'pending_chats_for': [],
+    'last_chat_actions': {
+            'last_write_timestamp': <span class="l">1425486251999L</span>,
+            'last_reader': '<span class="s">fake_username1</span>',
+            'last_write_type': '<span class="s">text</span>',
+            'last_writer': '<span class="s">fake_username2</span>',
+            'last_read_timestamp': <span class="l">1425486376783L</span>
+    },
+    'pending_received_snaps': [],
+    'conversation_messages': {
+        'messaging_auth': {
+            'mac': '<span class="s">FJNXMPvslXEXWkRA0PUFOclOb219sFjhzgDyYbAx[...]</span>',
+            'payload': '<span class="s">eyJ1c2VybmFtZSI6ImdoY29sbGVnZSIsImNv[...]</span>'
+        },
+        'messages': [{
+            'chat_message': {
+                'body': {
+                    'text': '<span class="s">test message</span>',
+                    'type': '<span class="s">text</span>'
+                },
+                'chat_message_id': 'a6647952-0fec-4dc8-9be4-7f65405f775e',
+                'seq_num': 183,
+                'timestamp': <span class="l">1425149750981L</span>,
+                'saved_state': {
+                    'fake_username2': {
+                        'version': 1,
+                        'saved': True
+                    }
+                },
+                'header': {
+                    'to': ['<span class="s">fake_username2</span>'],
+                    'from': '<span class="s">fake_username1</span>',
+                    'conv_id': 'fake_username1~fake_username2'
+                },
+                'type': 'chat_message',
+                'id': 'cef3186b-5efe-4ff2-b292-3691e93f7800'
+            },
+            'iter_token': '{"fake_username1":183}~{}'
+        }],
+    },
+    'iter_token': '1425486251999~fake_username2~fake_username1',
+    'conversation_state': {
+        'user_sequences': {
+            'fake_username2': 68,
+            'fake_username1': 235
+        },
+        'user_chat_releases': {
+            'fake_username2': {
+                'fake_username2': 68,
+                'fake_username1': 235
+            },
+            'fake_username1': {
+                'fake_username2': 68,
+                'fake_username1': 235
+            }
+        },
+    },
+    'participants': ['<span class="s">fake_username2</span>', '<span class="s">fake_username1</span>'],
+    'id': 'fake_username2~fake_username1',
+    'last_snap': {
+        'c_id': 'FAKE_USERNAME1~1B8825F6-85F1-4DA52[...]',
+        'rp': '<span class="s">fake_username2</span>',
+        'm': <span class="i">0</span>,
+        'ts': <span class="l">1425134648000L</span>,
+        'st': <span class="i">2</span>,
+        'sts': <span class="l">1425134626427L</span>,
+        'id': '<span class="s">666812425134626427s</span>'
+    }
+}]</code>
+</pre>
+                </div>
+                <table class="table" style="color:#FFFFFF; font-weight:500px">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>last_interaction_ts</th>
+                            <th>long</th>
+                            <th>timestamp of the last interaction</th>
+                        </tr>
+                        <tr>
+                            <th>pending_chats_for</th>
+                            <th>list</th>
+                            <th>see <a href="index.html#logging_in_pending_chats">pending_chats_for</a></th>
+                        </tr>
+                        <tr>
+                            <th>last_chat_actions</th>
+                            <th>dict</th>
+                            <th>see <a href="index.html#logging_in_last_chat_actions">last_chat_actions</a></th>
+                        </tr>
+                        <tr>
+                            <th>pending_received_snaps</th>
+                            <th>list</th>
+                            <th>see <a href="index.html#logging_in_pending_received_snaps">pending_received_snaps</a></th>
+                        </tr>
+                        <tr>
+                            <th>conversation_messages</th>
+                            <th>dict</th>
+                            <th>see <a href="index.html#logging_in_conversation_messages">conversation_messages</a></th>
+                        </tr>
+                        <tr>
+                            <th>participants</th>
+                            <th>list</th>
+                            <th>list of participants in the chat</th>
+                        </tr>
+                        <tr>
+                            <th>id</th>
+                            <th>string</th>
+                            <th>id of the chat</th>
+                        </tr>
+                        <tr>
+                            <th>last_snap</th>
+                            <th>dict</th>
+                            <th>see <a href="index.html#logging_in_last_snap">last_snap</a></th>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        <div class="col-md-3"></div>
+      </div>
+</body>
+</html>

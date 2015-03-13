@@ -1,0 +1,264 @@
+//todo - add the "requests" section (friend requests) and "my_stories"
+//todo - pending chats for, pending received snaps
+{
+    'conversations_response': [{
+        'last_interaction_ts': 1425486251999L,
+        'pending_chats_for': [],
+        'last_chat_actions': {
+                'last_write_timestamp': 1425486251999L,
+                'last_reader': 'fake_username1',
+                'last_write_type': 'text',
+                'last_writer': 'fake_username2',
+                'last_read_timestamp': 1425486376783L
+        },
+        'pending_received_snaps': [],
+        'conversation_messages': {
+            'messaging_auth': {
+                'mac': 'FJNXMPvslXEXWkRA0PUFOclOb219sFjhzgDyYbAxJyE=',
+                'payload': 'eyJ1c2VybmFtZSI6ImdoY29sbGVnZSIsImNvbnZJZCI6ImRhbi53YXRjb35naGNvbGxlZ2UiLCJ0aW1lc3RhbXAiOjE0MjU0OTA1MDQ0ODZ9'
+            },
+            'messages': [{
+                'chat_message': {
+                    'body': {
+                        'text': 'test message',
+                        'type': 'text'
+                    },
+                    'chat_message_id': 'a6647952-0fec-4dc8-9be4-7f65405f775e',
+                    'seq_num': 183,
+                    'timestamp': 1425149750981L,
+                    'saved_state': {
+                        'fake_username2': {
+                            'version': 1,
+                            'saved': True
+                        }
+                    },
+                    'header': {
+                        'to': ['fake_username2'],
+                        'from': 'fake_username1',
+                        'conv_id': 'fake_username1~fake_username2'
+                    },
+                    'type': 'chat_message',
+                    'id': 'cef3186b-5efe-4ff2-b292-3691e93f7800'
+                },
+                'iter_token': '{"fake_username1":183}~{}'
+            }],
+        },
+        'iter_token': '1425486251999~fake_username2~fake_username1',
+        'conversation_state': {
+            'user_sequences': {
+                'fake_username2': 68,
+                'fake_username1': 235
+            },
+            'user_chat_releases': {
+                'fake_username2': {
+                    'fake_username2': 68,
+                    'fake_username1': 235
+                },
+                'fake_username1': {
+                    'fake_username2': 68,
+                    'fake_username1': 235
+                }
+            },
+        },
+        'participants': ['fake_username2', 'fake_username1'],
+        'id': 'fake_username2~fake_username1',
+        'last_snap': {
+            'c_id': 'FAKE_USERNAME1~1B8825F6-85F1-4DA5-A92F-7BD1C147B761FAKE_USERNAME2',
+            'rp': 'fake_username2',
+            'm': 0,
+            'ts': 1425134648000L,
+            'st': 2,
+            'sts': 1425134626427L,
+            'id': '666812425134626427s'
+        }
+    }],
+    'stories_response': {
+        'friend_stories':
+        [{
+            'username': 'fake_username3',
+            'mature_content': False,
+            'stories':
+            [{
+                'story': {
+                    'username': 'fake_username3',
+                    'media_id': '6031684296048640',
+                    'media_iv': '0vEKMxXDofp33DNKARRnsg==',
+                    'timestamp': 1425485539456L,
+                    'zipped': False,
+                    'time_left': 81434932,
+                    'mature_content': False,
+                    'media_key': 'QwwptKjYyTayVDbR88sElcdawO//ESe1bSxW6a7EkAw=',
+                    'thumbnail_url': 'https://feelinsonice-hrd.appspot.com/bq/story_thumbnail?story_id=6031684296048640',
+                    'client_id': 'GHSTORY~13c76c33-80b0-4de6-aa38-3c4476122144',
+                    'time': 8.0,
+                    'media_type': 0,
+                    'thumbnail_iv': '/LBLYT7Buqh5WpgVFea3AA==',
+                    'media_url': 'https://feelinsonice-hrd.appspot.com/bq/story_blob?story_id=6031684296048640',
+                    'id': 'fake_username3~1425485489603',
+                    'is_shared': False
+                },
+                'viewed': True
+            }]
+        }],
+        'friend_stories_delta': False,
+        'my_stories': [],
+        'mature_content_text': {
+            'yes_text': 'Yes',
+            'message': "The red exclamation mark on this Story indicates that Stories posted by this user may not be suitable for sensitive viewers. Do you wish to continue? After selecting 'Yes', you will never be prompted again.",
+            'no_text': 'No',
+            'title': 'Content Warning'
+        },
+        'my_group_stories': []
+    },
+    'updates_response': {
+        'device_token': 'BDEEF5FA255FD6046A8062F3E7F5C663A7779CFF21FFC1B9D50D3E785D4FC4B6',
+        'last_address_book_updated_date': 0,
+        'mobile_verification_key': 'MjI3ODpnaGNvbGxlZ2U=',
+        'client_properties': {
+            'snapcash_new_tos_accepted': 'true',
+            'snapcash_tos_v2_accepted': 'true'
+        },
+        'enable_video_transcoding_android': True,
+        'searchable_by_phone_number': False,
+        'feature_settings': {
+            'front_facing_flash': True,
+            'smart_filters': True,
+            'replay_snaps': True,
+            'power_save_mode': False,
+            'special_text': False,
+            'visual_filters': False,
+            'swipe_cash_mode': True
+        },
+        'is_cash_active': True,
+        'study_settings': {
+            'SPDY': '{"experimentId":"1","ENABLE_SPDY":"false"}',
+            'EarlyUploadSnaps': '{"experimentId":"0","early_upload_snaps":"true"}',
+            'DISCOVER_V2': '{
+                "WIFI_RECENT_USER_THRESHOLD_HOURS":"72",
+                "WIFI_RECENT_USER_NUM_DSNAPS_TO_LOAD":"1",
+                "experimentId":"0",
+                "WAN_NUM_DSNAPS_TO_LOAD_BEFORE_CURRENT":"1",
+                "WAN_RECENT_CHANNEL_NUM_DSNAPS_TO_LOAD":"1",
+                "WIFI_RECENT_CHANNEL_NUM_DSNAPS_TO_LOAD":"4",
+                "WAN_RECENT_CHANNEL_THRESHOLD_HOURS":"48",
+                "WIFI_RECENT_CHANNEL_THRESHOLD_HOURS":"72",
+                "WAN_NUM_DSNAPS_TO_LOAD_AFTER_CURRENT":"2"
+            }',
+            'DOWNLOAD_MANAGER': '{
+                "experimentId":"1",
+                "MAX_CONCURRENT_REQUESTS":"10",
+                "MAX_CONCURRENT_BACKGROUND_REQUESTS":"5"
+            }',
+            'SNAP_LOADING': '{
+                "BATCH_SIZE_TO_AUTO_LOAD_SNAP_STACK":"4",
+                "experimentId":"1","AUTO_LOAD_SNAPS":"1",
+                "INITIAL_NUMBER_OF_SNAP_STACKS_TO_LOAD":"4",
+                "MAX_NUMBER_OF_SNAP_STACKS_TO_AUTO_LOAD":"10",
+                "NUMBER_OF_SNAP_STACKS_TO_AUTO_LOAD":"1",
+                "INITIAL_BATCH_SIZE_TO_LOAD_SNAP_STACK":"4"
+            }',
+            'AdManager': '{
+                "network_code":"80247475",
+                "experimentId":"0",
+                "ad_splash_impression_duration":"0",
+                "is_active":"true",
+                "ad_page_impression_duration":"0"
+            }',
+            'REGISTER_EXP_1': '{
+                "experimentId":"1",
+                "enable_reg_exp":"true"
+            }',
+            'DELTA_RESPONSE': '{
+                "experimentId":"1",
+                "CONVERSATIONS_DELTA":"on",
+                "FRIENDS_STORY_DELTA":"on"
+            }',
+            'STORY_LOADING': '{
+                "INITIAL_NUMBER_OF_FRIEND_STORIES_TO_LOAD":"3",
+                "NUMBER_OF_FRIEND_STORIES_TO_AUTO_LOAD":"1",
+                "experimentId":"0",
+                "INITIAL_NUMBER_OF_SHARED_STORIES_TO_LOAD":"2",
+                "MAX_NUMBER_OF_SHARED_STORIES_TO_AUTO_LOAD":"2",
+                "AUTO_LOAD_STORIES":"0",
+                "MAX_NUMBER_OF_FRIEND_STORIES_TO_AUTO_LOAD":"5",
+                "NUMBER_OF_SHARED_STORIES_TO_AUTO_LOAD":"1"
+            }',
+            'USE_VIDEO_STABILIZATION': '{
+                "experimentId":"0",
+                "option":"off"
+            }'
+        },
+        'email': 'fake_email@address.com',
+        'current_timestamp': 1425490504483L,
+        'cash_customer_id': 'fake_username1',
+        'notification_sound_setting': 'OFF',
+        'can_view_mature_content': False,
+        'snapchat_phone_number': '+447937985869',
+        'image_caption': False,
+        'cash_provider': 'SQUARE',
+        'user_id': '7692e2a8-7d66-42c6-bc49-00c159cb97cc',
+        'number_of_best_friends': 7,
+        'logged': True,
+        'video_filters_enabled': True,
+        'should_call_to_verify_number': False,
+        'score': 232,
+        'qr_path': 'qr-add/cdec5978168a18acaa1cc8c1b771987b',
+        'auth_token': '884d3b0d773576d6e4b60a2f8a3f1a2d',
+        'sent': 179,
+        'recents': [],
+        'username': 'fake_username1',
+        'blocked_from_using_our_story': False,
+        'added_friends_timestamp': 1425051287787L,
+        'birthday': '1996-01-01',
+        'enable_save_story_to_gallery': True,
+        'should_send_text_to_verify_number': False,
+        'story_privacy': 'EVERYONE',
+        'received': 42,
+        'temp': 'temp',
+        'mobile': '',
+        'contacts_resync_request': 1,
+        'allowed_to_use_cash': 'NO_VERIFIED_PHONE',
+        'snap_p': 0,
+        'requests': [],
+        'seen_tooltips': [
+            'swipe_filters',
+            'snap',
+            'caption',
+            'first_location',
+            'profile'
+        ]
+    },
+    'get_channels_url': '/discover/channel_list?region=UK',
+    'discover': {
+        'compatibility': 'device_not_supported'
+    },
+    'friends_response': {
+        'bests': ['fake_username2'],
+        'friends': [
+            {
+                'type': 0,
+                'direction': 'OUTGOING',
+                'can_see_custom_stories': True,
+                'name': 'fake_username2',
+                'display': ''
+            }
+        ],
+        'added_friends': [
+            {
+                'direction': 'INCOMING',
+                'display': '',
+                'type': 0,
+                'ts': 1425051287787L
+                'name': 'fake_username3'
+            }
+        ]
+    },
+    'messaging_gateway_info': {
+        'gateway_auth_token': {
+            'mac': 'v1.key.20150108v1.iv.I3N9Gk8gLpWcirljNXv0LA==',
+            'payload': 'G8RHacNlzcgR8G/7OUXPwZFem9XnUtqj2OpW5kHoMTlMV3kLcvS5ZNrS6624B6/LERq6JZw8/PJsQYcgl/U1bxSyE9eyHe9lRj/HW3HdJD6lNkfUP0SJc24HYfkI6tpkVTnEbrt4fB62QNexoOnO13UNapfjkHx7D/2Y5XhtYVSVpV7zTBA267gT59o9lyvQbirm'
+        },
+        'gateway_server': '23.251.158.175:443'
+    },
+    'background_fetch_secret_key': 'AX1h+jsOplvGdx6Mjaur8/BrEJxiyYJdHhhcvGW8kyE='
+}
